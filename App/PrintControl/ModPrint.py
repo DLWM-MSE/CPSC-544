@@ -8,10 +8,10 @@ class ModPrint:
     #ATTRIBUTES
 
     #Attributes for text modifiers
-    boldMod = '\033[1m'
-    endMod = '\033[0m'
-    redMod = '\033[1;31;40m'
-    yellowMod = '\033[1;33;40m'
+    boldMod = "\033[1m"
+    endMod = "\033[0m"
+    redMod = "\033[1;31;40m"
+    yellowMod = "\033[1;33;40m"
 
 
     #METHODS  
@@ -50,10 +50,10 @@ class ModPrint:
         """
         for index in range(len(arr)): 
             if index == loc[0] or index == loc[1]:
-                print(ModPrint.bold(str(arr[index])), end=' ')
+                print(ModPrint.bold(str(arr[index])), end=" ")
             else:
-                print(arr[index], end=' ')
-        print('')
+                print(arr[index], end=" ")
+        print("")
 
     @staticmethod
     def red(msg):
@@ -111,7 +111,7 @@ class ModPrint:
         """
         for index in range(len(arr)): 
             if index == loc[0] or index == loc[1]:
-                print(ModPrint.yellow(str(arr[index])), end=' ')
+                print(ModPrint.yellow(str(arr[index])), end=" ")
             else:
-                print(arr[index], end=' ')
-        print('') 
+                print(arr[index], end=" ")
+        print("") 
