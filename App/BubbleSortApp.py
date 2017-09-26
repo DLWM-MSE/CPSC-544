@@ -1,5 +1,6 @@
 from SortAlg.bubble_sort_algoritm import bubble_sort
 from PrintControl.ModPrint import ModPrint
+from InputControl.input_checker import input_check
 
 
 def main():
@@ -7,14 +8,33 @@ def main():
     Main sequence of the BubbleSortApp. This will act the the controller between
     all modules.
     """
-    mySeq = [1, 4, 1, 3, 5, 1, 7, 8, 2, 2, 8, 6]  # <- Test sorting sequence
+    #mySeq = [1, 4, 1, 3, 5, 1, 7, 8, 2, 2, 8, 6]  # <- Test sorting sequence
     #initialize all flags and trackers
     IS_COMPLETE = False
     CUR_NDX = 0
     CUR_ITER = 1
 
-    print("Values to be sorted : {}\n".format(mySeq))
+    while True:
+        #mySeq = [int(mySeq) for mySeq in input('Please enter 2 to 8 integers below with spaces in between each integer\nInput: ').split()]      
+        #sequences the input into a list
 
+        mySeq = input('Please enter 2 to 8 integers below with spaces in between each integer\nInput: ').split()
+        checkResult = input_check(mySeq)
+
+        if(checkResult == 1):
+            ModPrint.print_red("Error: an input was less than 1 and/or greater than 9")
+        elif(checkResult == 2):
+            ModPrint.print_red("Error: the number of inputs are less than 2")
+        elif(checkResult == 3):
+            ModPrint.print_red("Error: the number of inputs are greater than 8")   
+        elif(checkResult == 4):
+            ModPrint.print_red("Error: there is an input that is not an integer")  
+        else:
+            ModPrint.print_yellow("Inputs Accepted!")
+            mySeq = [int(i) for i in mySeq]
+            break;
+
+    print("Values to be sorted : {}\n".format(mySeq))
 # ==== Framework below shows proper use of bubble_sort() function [Run to see the output]: ====
 
     while IS_COMPLETE is False:  # Keep sorting until the entire list is sorted
@@ -31,7 +51,7 @@ def main():
             CUR_ITER += 1
 
         elif isIteration is False and IS_COMPLETE is False:
-            print("{} Swapped @ Indexes {}".format(RTRN_DATAGRAM["sort_list"], RTRN_DATAGRAM["swp_ndx"] ))
+            #print("{} Swapped @ Indexes {}".format(RTRN_DATAGRAM["sort_list"], RTRN_DATAGRAM["swp_ndx"] ))
             ModPrint.print_yllw_bbl_arr(RTRN_DATAGRAM["sort_list"], RTRN_DATAGRAM["swp_ndx"])
             CUR_NDX = RTRN_DATAGRAM["swp_ndx"][1]   # advance to a next swap index to preserve within-iteration flow
 
