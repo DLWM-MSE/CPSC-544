@@ -2,7 +2,7 @@
 This function grabs the 2 to 8 user input integer values and returns a sequence of those
 integers in a list.
 """
-
+import re
 def input_check(arr):
     """
     Name: input_check(arr):
@@ -16,17 +16,17 @@ def input_check(arr):
     Notes: Values must be integers between 1 and 9, and the number of values must be
            2 and 8.
     """
-    try:
-        for num in arr:
-            if not 1 <= num <= 9:
-                return 1 #Error: A number is less than 1 or greater than 9.
-        if len(arr) < 2:
-            return 2 #Error: The number of imputs are less than 2.
-        elif len(arr) > 8:
-            return 3 #Error: The number of inputs are greater than 8.
-        else:
-            return 0 #No Error.
 
-    except ValueError:
-        return 4 #Error: input is not an integer.
-    
+    pattern = '[1-9]'
+    for num in arr:
+        match = re.match(pattern, num)
+        if not match:
+            return 4 #Error: input is not an integer.
+        if not 1 <= int(num) <= 9:
+            return 1 #Error: A number is less than 1 or greater than 9.
+    if len(arr) < 2:
+        return 2 #Error: The number of inputs are less than 2.
+    elif len(arr) > 8:
+        return 3 #Error: The number of inputs are greater than 8.
+    else:
+        return 0 #No Error.
