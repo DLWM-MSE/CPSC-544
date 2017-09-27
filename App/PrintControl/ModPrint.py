@@ -8,10 +8,10 @@ class ModPrint:
     #ATTRIBUTES
 
     #Attributes for text modifiers
-    boldMod = "\033[1m"
-    endMod = "\033[0m"
-    redMod = "\033[1;31;40m"
-    yellowMod = "\033[1;33;40m"
+    boldMod = "\x1b[1m"
+    endMod = "\x1b[0m"
+    redMod = "\x1b[1;31;40m"
+    yellowMod = "\x1b[1;33;40m"
 
 
     #METHODS  
