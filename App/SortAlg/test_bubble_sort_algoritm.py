@@ -1,4 +1,4 @@
-from bubble_sort_algoritm import bubble_sort
+from SortAlg.bubble_sort_algoritm import bubble_sort
 
 def test_sorting_silent():
     """ Test sequence sorting in a silent mode
