@@ -32,7 +32,7 @@ def main():
         else:
             ModPrint.print_yellow("Inputs Accepted!")
             mySeq = [int(i) for i in mySeq]
-            break;
+            break
 
     print("Values to be sorted : {}\n".format(mySeq))
 # ==== Framework below shows proper use of bubble_sort() function [Run to see the output]: ====
