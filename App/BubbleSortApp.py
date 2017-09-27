@@ -15,14 +15,12 @@ def main():
     CUR_ITER = 1
 
     while True:
-        #mySeq = [int(mySeq) for mySeq in input('Please enter 2 to 8 integers below with spaces in between each integer\nInput: ').split()]      
-        #sequences the input into a list
 
-        mySeq = input('Please enter 2 to 8 integers below with spaces in between each integer\nInput: ').split()
+        mySeq = input('Please enter 2 to 8 single digit integers below with spaces in between each value\nInput: ').split()
         checkResult = input_check(mySeq)
 
         if(checkResult == 1):
-            ModPrint.print_red("Error: an input was less than 1 and/or greater than 9")
+            ModPrint.print_red("Error: an input was less than 0 and/or greater than 9")
         elif(checkResult == 2):
             ModPrint.print_red("Error: the number of inputs are less than 2")
         elif(checkResult == 3):
