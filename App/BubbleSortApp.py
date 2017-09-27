@@ -1,15 +1,17 @@
 from SortAlg.bubble_sort_algoritm import bubble_sort
 from PrintControl.ModPrint import ModPrint
 from InputControl.input_checker import input_check
+from InputControl.cmd_checker import cmd_check
 from ErrorReporter.ErrorReporter import ErrorReport
 
 
 def main():
+
     """
     Main sequence of the BubbleSortApp. This will act the the controller between
     all modules.
     """
-
+while True:
     #initialize all flags and trackers
     IS_COMPLETE = False
     CUR_NDX = 0
@@ -19,14 +21,15 @@ def main():
 
         mySeq = input('Please enter 2 to 8 single digit integers below with spaces in between each value\nInput: ').split()
         checkResult = input_check(mySeq) # Acquire result of input check
+        checkQuit = cmd_check(mySeq)
 
         if checkResult: # If the result is anything but 0
             ModPrint.print_red(ErrorReport.define_error_code('ValInput', checkResult))
         else: # No errors found
             ModPrint.print_yellow("Inputs Accepted!")
-            mySeq = [int(i) for i in mySeq] 
+            mySeq = [int(i) for i in mySeq]
             break
-      
+
     print("Values to be sorted : {}\n".format(mySeq))
 # ==== Framework below shows proper use of bubble_sort() function [Run to see the output]: ====
 
@@ -50,6 +53,11 @@ def main():
 
         else:   # isIteration is True and IS_COMPLETE is True -> sorting is complete, do nothing
             pass
-    
+
     print("Sorting is complete!")
+    cmd = input('continue? ')
+    checkQuit = cmd_check(cmd)
+    if checkQuit == 10:
+        continue
+
 if __name__ == "__main__": main()
