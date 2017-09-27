@@ -9,10 +9,16 @@ def cmd_check(arr):
            recongnizes: ['quit', 'q', 'abort', 'stop']|['continue', 'cont']
     """
 
-quit_cmds = ['quit', 'q', 'abort', 'stop']
-cont_cmds = ['continue', 'cont']
-    for element in arr:
-        if element.lower() in quit_cmds:
-            return 9
-        elif element.lower() in cont_cmds:
-            return 10
+    quit_cmds = ['quit', 'q', 'abort', 'stop']
+    cont_cmds = ['continue', 'cont']
+    if isinstance(arr, str):    #this input used after bubble sort it complete
+        if arr in quit_cmds:
+            print('quit')
+        elif arr in cont_cmds:
+            print('cont')
+    else:                       #this input used at the start of the bubble sort
+        for element in arr:
+            if element.lower() in quit_cmds:
+                print('quit')
+            elif element.lower() in cont_cmds:
+                print('cont')
