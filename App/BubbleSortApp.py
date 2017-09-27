@@ -1,6 +1,7 @@
 from SortAlg.bubble_sort_algoritm import bubble_sort
 from PrintControl.ModPrint import ModPrint
 from InputControl.input_checker import input_check
+from ErrorReporter.ErrorReporter import ErrorReport
 
 
 def main():
@@ -8,7 +9,7 @@ def main():
     Main sequence of the BubbleSortApp. This will act the the controller between
     all modules.
     """
-    #mySeq = [1, 4, 1, 3, 5, 1, 7, 8, 2, 2, 8, 6]  # <- Test sorting sequence
+
     #initialize all flags and trackers
     IS_COMPLETE = False
     CUR_NDX = 0
@@ -17,21 +18,15 @@ def main():
     while True:
 
         mySeq = input('Please enter 2 to 8 single digit integers below with spaces in between each value\nInput: ').split()
-        checkResult = input_check(mySeq)
+        checkResult = input_check(mySeq) # Acquire result of input check
 
-        if(checkResult == 1):
-            ModPrint.print_red("Error: an input was less than 0 and/or greater than 9")
-        elif(checkResult == 2):
-            ModPrint.print_red("Error: the number of inputs are less than 2")
-        elif(checkResult == 3):
-            ModPrint.print_red("Error: the number of inputs are greater than 8")   
-        elif(checkResult == 4):
-            ModPrint.print_red("Error: there is an input that is not an integer")  
-        else:
+        if checkResult: # If the result is anything but 0
+            ModPrint.print_red(ErrorReport.define_error_code('ValInput', checkResult))
+        else: # No errors found
             ModPrint.print_yellow("Inputs Accepted!")
-            mySeq = [int(i) for i in mySeq]
+            mySeq = [int(i) for i in mySeq] 
             break
-
+      
     print("Values to be sorted : {}\n".format(mySeq))
 # ==== Framework below shows proper use of bubble_sort() function [Run to see the output]: ====
 
