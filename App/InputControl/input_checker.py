@@ -15,6 +15,10 @@ def input_check(arr):
     Notes: Values must be integers between 1 and 9, and the number of values must be
            2 and 8.
     """
+    quit_cmds = ['quit', 'q', 'abort', 'stop']
+    for element in arr:
+        if element.lower() in quit_cmds:
+            print('quitting!')
     for num in arr:
         match = any(c.isalpha() for c in num) #Search for alphabets.
         if match:
