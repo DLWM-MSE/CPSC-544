@@ -13,12 +13,12 @@ def cmd_check(arr):
     cont_cmds = ['continue', 'cont']
     if isinstance(arr, str):    #this input used after bubble sort it complete
         if arr.lower() in quit_cmds:
-            return 9
+            quit()
         elif arr.lower() in cont_cmds:
             return 10
     else:                       #this input used at the start of the bubble sort
         for element in arr:
             if element.lower() in quit_cmds:
-                return 9
+                quit()
             elif element.lower() in cont_cmds:
                 return 10
