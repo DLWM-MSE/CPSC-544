@@ -1,8 +1,10 @@
+from colorama import init, Fore, Back, Style
 from SortAlg.bubble_sort_algoritm import bubble_sort
 from PrintControl.ModPrint import ModPrint
 from InputControl.input_checker import input_check
 from InputControl.cmd_checker import cmd_check
 from ErrorReporter.ErrorReporter import ErrorReport
+
 
 
 def main():
@@ -11,12 +13,14 @@ def main():
     Main sequence of the BubbleSortApp. This will act the the controller between
     all modules.
     """
+    
 while True:
     #initialize all flags and trackers
     IS_COMPLETE = False
     CUR_NDX = 0
     CUR_ITER = 1
-
+    
+    init()
     while True:
 
         mySeq = input('Please enter 2 to 8 single digit integers below with spaces in between each value\nInput: ').split()
