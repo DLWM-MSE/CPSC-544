@@ -17,12 +17,12 @@ def main():
     while True:
         #initialize all flags and trackers
         IS_COMPLETE = False
-        CUR_NDX = 0
+        
         CUR_ITER = 1
         
         init()
         while True:
-
+        
             mySeq = input("Please enter 2 to 8 single digit integer below with spaces in between each value.\n"\
                           "Or enter 'quit', 'q', 'abort', 'stop', or 'no' to end the application.\n"\
                           "Input: ").split()
@@ -50,7 +50,7 @@ def main():
 
         print("Values to be sorted : {}\n".format(mySeq))
     # ==== Framework below shows proper use of bubble_sort() function [Run to see the output]: ====
-
+        CUR_NDX = len(mySeq) - 1
         while IS_COMPLETE is False:  # Keep sorting until the entire list is sorted
 
             RTRN_DATAGRAM = bubble_sort(mySeq, CUR_NDX, mode = "verbose")    # capture return datagram for futher use
@@ -60,7 +60,7 @@ def main():
             isIteration = RTRN_DATAGRAM["isIteration"]    # this flag is set when one complete sorting iteration is complete
 
             if isIteration is True and IS_COMPLETE is False:     # advance to a new sorting iteration by resetting swap index to 0
-                CUR_NDX = 0                               # reset iteration index to start sorting back at index 0
+                CUR_NDX = len(mySeq) - 1                               # reset iteration index to start sorting back at index 0
                 print("Iteration {} is Complete\n".format(CUR_ITER))
                 CUR_ITER += 1
 
