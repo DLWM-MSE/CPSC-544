@@ -1,3 +1,4 @@
+from time import sleep
 from colorama import init, Fore, Back, Style
 from SortAlg.bubble_sort_algoritm import bubble_sort
 from PrintControl.ModPrint import ModPrint
@@ -17,12 +18,12 @@ def main():
     while True:
         #initialize all flags and trackers
         IS_COMPLETE = False
-        CUR_NDX = 0
+        
         CUR_ITER = 1
         
         init()
         while True:
-
+        
             mySeq = input("Please enter 2 to 8 single digit integer below with spaces in between each value.\n"\
                           "Or enter 'quit', 'q', 'abort', 'stop', or 'no' to end the application.\n"\
                           "Input: ").split()
@@ -43,26 +44,61 @@ def main():
                 ModPrint.print_red(ErrorReport.define_error_code('ValInput', inputCheckResult))
                 ModPrint.print_red("OR")
                 ModPrint.print_red(ErrorReport.define_error_code('StrtCmdInput', cmdCheckResult))
+                print(" ")
             else: # No errors found
                 ModPrint.print_yellow("Inputs Accepted!")
                 mySeq = [int(i) for i in mySeq]
                 break
 
         print("Values to be sorted : {}\n".format(mySeq))
+        print(" ")
+        while True:
+            cmd = input("To output all steps, enter: 'verbose' or 'v'\n"\
+                        "To get only the results, enter: 'silent' or 's'\n"\
+                        "To quit, enter: 'quit', 'q', 'abort', 'stop', or 'no'\n"\
+                        "Input: ") # Asks user for input
+            print(" ")
+
+            cmdCheckResult = cmd_check(cmd) # Checks input
+            if cmdCheckResult == "verbose": # If verbose, break out of this loop
+                mode = "verbose"
+                break
+            elif cmdCheckResult == "silent": # If silent, break out of this loop
+                mode = "silent"
+                break
+            elif cmdCheckResult == 'quit': # If quit, end the application
+                quit()
+            elif cmdCheckResult == 1: # If error, stay in the loop to ask froma proper input
+                ModPrint.print_red("Error: ")
+                ModPrint.print_red(ErrorReport.define_error_code('VerbCmdInput', cmdCheckResult))
+                print(" ")
     # ==== Framework below shows proper use of bubble_sort() function [Run to see the output]: ====
-
+        CUR_NDX = len(mySeq) - 1
         while IS_COMPLETE is False:  # Keep sorting until the entire list is sorted
-
-            RTRN_DATAGRAM = bubble_sort(mySeq, CUR_NDX, mode = "verbose")    # capture return datagram for futher use
+            sleep(0.5)
+            RTRN_DATAGRAM = bubble_sort(mySeq, CUR_NDX, mode = mode)    # capture return datagram for futher use
 
             mySeq = RTRN_DATAGRAM["sort_list"]            # capture the current state of sequence under sorting
             IS_COMPLETE = RTRN_DATAGRAM["isComplete"]      # this flag is set True when list can no longer be sorted
             isIteration = RTRN_DATAGRAM["isIteration"]    # this flag is set when one complete sorting iteration is complete
 
             if isIteration is True and IS_COMPLETE is False:     # advance to a new sorting iteration by resetting swap index to 0
-                CUR_NDX = 0                               # reset iteration index to start sorting back at index 0
+                CUR_NDX = len(mySeq) - 1                               # reset iteration index to start sorting back at index 0
                 print("Iteration {} is Complete\n".format(CUR_ITER))
                 CUR_ITER += 1
+                while True:
+                    cmd = input("To continue the iteration, enter: 'continue', 'cont', or 'yes'\n"\
+                            "To quit, enter: 'quit', 'q', 'abort', 'stop', or 'no'\n"\
+                            "Input: ") # Asks user for input
+                    print(" ")
+                    cmdCheckResult = cmd_check(cmd) # Checks input
+                    if cmdCheckResult == 'cont': # If continue, break out of this loop
+                        break
+                    elif cmdCheckResult == 'quit': # If quit, end the application
+                        quit()
+                    elif cmdCheckResult == 1: # If error, stay in the loop to ask froma proper input
+                        ModPrint.print_red("Error: ")
+                        ModPrint.print_red(ErrorReport.define_error_code('IntrCmdInput', cmdCheckResult))
 
             elif isIteration is False and IS_COMPLETE is False:
                 #print("{} Swapped @ Indexes {}".format(RTRN_DATAGRAM["sort_list"], RTRN_DATAGRAM["swp_ndx"] ))
@@ -73,10 +109,12 @@ def main():
                 pass
 
         print("Sorting is complete!")
+        ModPrint.print_yellow("Result: {}\n".format(RTRN_DATAGRAM["sort_list"]))
         while True:
             cmd = input("To continue, enter: 'continue', 'cont', or 'yes'\n"\
                         "To quit, enter: 'quit', 'q', 'abort', 'stop', or 'no'\n"\
                         "Input: ") # Asks user for input
+            print(" ")
             cmdCheckResult = cmd_check(cmd) # Checks input
             if cmdCheckResult == 'cont': # If continue, break out of this loop
                 break
