@@ -12,11 +12,17 @@ def cmd_check(arr):
 
     quit_cmds = ['quit', 'q', 'abort', 'stop', 'no']
     cont_cmds = ['continue', 'cont', 'yes']
+    verb_cmds = ['verbose', 'v']
+    slnt_cmds = ['silent', 's']
     if isinstance(arr, str):    #this input used after bubble sort it complete
         if arr.lower() in quit_cmds:
             return 'quit'
         elif arr.lower() in cont_cmds:
             return 'cont'
+        elif arr.lower() in verb_cmds:
+            return 'verbose'
+        elif arr.lower() in slnt_cmds:
+            return 'silent'
         else:
             return 1
     else:                       #this input used at the start of the bubble sort

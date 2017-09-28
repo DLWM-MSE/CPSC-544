@@ -49,11 +49,31 @@ def main():
                 break
 
         print("Values to be sorted : {}\n".format(mySeq))
+        while True:
+            cmd = input("To output all steps, enter: 'verbose' or 'v'\n"\
+                        "To get only the results, enter: 'silent' or 's'\n"\
+                        "To quit, enter: 'quit', 'q', 'abort', 'stop', or 'no'\n"\
+                        "Input: ") # Asks user for input
+            print(" ")
+
+            cmdCheckResult = cmd_check(cmd) # Checks input
+            if cmdCheckResult == "verbose": # If continue, break out of this loop
+                mode = "verbose"
+                break
+            elif cmdCheckResult == "silent":
+                mode = "silent"
+                break
+            elif cmdCheckResult == 'quit': # If quit, end the application
+                quit()
+            elif cmdCheckResult == 1: # If error, stay in the loop to ask froma proper input
+                ModPrint.print_red("Error: ")
+                ModPrint.print_red(ErrorReport.define_error_code('VerbCmdInput', cmdCheckResult))
+                print(" ")
     # ==== Framework below shows proper use of bubble_sort() function [Run to see the output]: ====
         CUR_NDX = len(mySeq) - 1
         while IS_COMPLETE is False:  # Keep sorting until the entire list is sorted
 
-            RTRN_DATAGRAM = bubble_sort(mySeq, CUR_NDX, mode = "verbose")    # capture return datagram for futher use
+            RTRN_DATAGRAM = bubble_sort(mySeq, CUR_NDX, mode = mode)    # capture return datagram for futher use
 
             mySeq = RTRN_DATAGRAM["sort_list"]            # capture the current state of sequence under sorting
             IS_COMPLETE = RTRN_DATAGRAM["isComplete"]      # this flag is set True when list can no longer be sorted
@@ -73,10 +93,12 @@ def main():
                 pass
 
         print("Sorting is complete!")
+        ModPrint.print_yellow("Result: {}\n".format(RTRN_DATAGRAM["sort_list"]))
         while True:
             cmd = input("To continue, enter: 'continue', 'cont', or 'yes'\n"\
                         "To quit, enter: 'quit', 'q', 'abort', 'stop', or 'no'\n"\
                         "Input: ") # Asks user for input
+            print(" ")
             cmdCheckResult = cmd_check(cmd) # Checks input
             if cmdCheckResult == 'cont': # If continue, break out of this loop
                 break

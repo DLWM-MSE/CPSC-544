@@ -18,7 +18,12 @@ class ErrorReport:
                 'IntrCmdInput': {0: "No error",
                                  1: "Command is not recognized. You can input the following:\n"\
                                      "To quit: Enter 'quit', 'q', 'abort', 'stop', or 'no'\n"\
-                                     "To continue: Enter 'continue', 'cont', or 'yes'"}}
+                                     "To continue: Enter 'continue', 'cont', or 'yes'"},
+                'VerbCmdInput': {0: "No error",
+                                 1: "Command is not recognized. You can input the following:\n"\
+                                    "To run Verbose mode: Enter 'verbose' or 'v'\n"\
+                                    "To run Silent mode: Enter 'silent' or 's'\n"\
+                                    "To quit: Enter 'quit', 'q', 'abort', 'stop', 'no'\n"}}
     #METHODS
     @classmethod
     def get_error(cls, errorType, code):
@@ -30,6 +35,8 @@ class ErrorReport:
                                                       at the first input.
                                                       'IntrCmdInput': command_checker errors
                                                       in the intermediary steps.
+                                                      'VerbCmdInput': command_checker errors
+                                                      in the verbose selection.
                code<int> = error code.
         Return: Upon success, proper error message is returned, otherwise lets user
                 know that the error library or error code is not defined.
