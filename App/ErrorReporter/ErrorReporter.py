@@ -8,13 +8,17 @@ class ErrorReport:
     """
     #ATTRIBUTES
     __errorCodes = {'ValInput': {0: "No error",
-                                 1: "Error: an input was less than 0 and/or greater than 9",
-                                 2: "Error: the number of inputs are less than 2",
-                                 3: "Error: the number of inputs are greater than 8",
-                                 4: "Error: there is an input that is not an integer"},
-                    'CmdInput': {0: "No error",
-                                 1: "Error: Can either enter QUIT or values to be sorted"}}
-
+                                 1: "An input was less than 0 and/or greater than 9",
+                                 2: "The number of inputs are less than 2",
+                                 3: "The number of inputs are greater than 8",
+                                 4: "There is an input that is not an integer"},
+                'StrtCmdInput': {0: "No error",
+                                 1: "Command is not recognized. You can input the following:\n"\
+                                     "To quit: Enter 'quit', 'q', 'abort', 'stop', 'no'\n"},
+                'IntrCmdInput': {0: "No error",
+                                 1: "Command is not recognized. You can input the following:\n"\
+                                     "To quit: Enter 'quit', 'q', 'abort', 'stop', or 'no'\n"\
+                                     "To continue: Enter 'continue', 'cont', or 'yes'"}}
     #METHODS
     @classmethod
     def get_error(cls, errorType, code):
@@ -22,7 +26,10 @@ class ErrorReport:
         Name: classmethod get_error(errorType, code)
         Input: errorType<string> = library of error codes to be checked.
                                    Current Libraries: 'ValInput': input_checker errors.
-                                                      'CmdInput': command_checker errors.
+                                                      'StrtCmdInput': command_checker errors
+                                                      at the first input.
+                                                      'IntrCmdInput': command_checker errors
+                                                      in the intermediary steps.
                code<int> = error code.
         Return: Upon success, proper error message is returned, otherwise lets user
                 know that the error library or error code is not defined.
