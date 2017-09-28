@@ -2,7 +2,9 @@ def cmd_check(arr):
     """
     Name: cmd_check(arr):
     Input: arr = array of inputs.
-    Return: 10 = the user decided to start the application again.
+    Return: 'cont' = the user decided to start the application again.
+            'quit' = the user wants to end the application.
+            1 = error.
     Purpose: Checks the user input on whether they want to quit or continue
     Notes: It is not case sensitive and only
            recongnizes: ['quit', 'q', 'abort', 'stop', 'no']|['continue', 'cont', 'yes']
@@ -12,13 +14,17 @@ def cmd_check(arr):
     cont_cmds = ['continue', 'cont', 'yes']
     if isinstance(arr, str):    #this input used after bubble sort it complete
         if arr.lower() in quit_cmds:
-            quit()
+            return 'quit'
         elif arr.lower() in cont_cmds:
-            return 10
+            return 'cont'
+        else:
+            return 1
     else:                       #this input used at the start of the bubble sort
         for element in arr:
             if element.lower() in quit_cmds:
-                quit()
+                return 'quit'
+            else:
+                return 1
 
 #----- how to use function -----#
 # def main():
